@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Contact Form</h1>
+            <small class="text-muted">Fill in this form to contact the site owners</small>
+        </div>
+        <form action="{{ url_for('contact') }}" method="POST">
+            {{ form.csrf_token }} 
+            
+            {% for message in form.name.errors %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.Email.errors %}
+                 <div class="flash">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.Subject.errors %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.Message.errors %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+            
+            <div class="well well-lg">
+                <label for="name"><strong> Name <span class="req" >{Required}</span> </strong> </label>
+                <div>
+                    <small class="text-muted">Please enter your full name</small>
+                </div>
+                {{ form.name(class = "textfield",placeholder='John Brown') }}
+                <br> </br>
+                <label for="email"><strong> Email <span class="req" >{Required}</span> </strong></label>
+                <div>
+                    <small class="text-muted">Please enter your e-mail address</small>
+                </div>
+                {{ form.Email(class = "textfield", placeholder='yourname@email.com') }}
+                <br> </br>
+                
+                <label for="subject"><strong> Subject <span class="req" >{Required}</span> </strong></label>
+                <div>
+                    <small class="text-muted">Please enter your subject area </small>
+                </div>
+                {{ form.Subject(class = "textfield", placeholder='Your subject goes here') }}
+                <br> </br>
+                
+                <label for="message"><strong> Message <span class="req" >{Required}</span></label>
+                <div>
+                    <small class="text-muted">Please enter the message you want to send</small>
+                </div>
+                {{ form.Message(class = "textfield", id = 'textbox',placeholder='Your message goes here') }}
+                <br> </br>
+                 {{ form.Submit(class = "button") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

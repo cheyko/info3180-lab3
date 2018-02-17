@@ -7,6 +7,9 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for, flash
+from form import ContactForm
+from app import mail
+from flask_mail import Message
 
 
 ###
@@ -23,6 +26,28 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+
+@app.route('/contact/', methods=['GET','POST'])
+def contact():
+    DeForm = ContactForm()
+    if request.method=='POST':
+         if DeForm.validate() == False:
+            flash('All fields are required.')
+            return render_template('contact.html',form=DeForm)
+
+         else:
+            formname = DeForm.name.data
+            formaddr = DeForm.Email.data
+            formsubject = DeForm.Subject.data
+            formmsg = DeForm.Message.data
+            data = Message(formsubject,sender=(formname,formaddr),recipients=['smtp.mailtrap.io'])
+            data.body = formmsg
+            mail.send(data)
+            flash('Messsage Sent successfully','success')
+            return redirect(url_for('home'))
+
+    elif request.method=='GET':
+        return render_template('contact.html', form=DeForm)
 
 
 ###
