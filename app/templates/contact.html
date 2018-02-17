@@ -9,34 +9,25 @@
         <form action="{{ url_for('contact') }}" method="POST">
             {{ form.csrf_token }} 
             
-            {% for message in form.name.errors %}
-                <div class="flash">{{ message }}</div>
-            {% endfor %}
-
-            {% for message in form.Email.errors %}
-                 <div class="flash">{{ message }}</div>
-            {% endfor %}
-
-            {% for message in form.Subject.errors %}
-                <div class="flash">{{ message }}</div>
-            {% endfor %}
-
-            {% for message in form.Message.errors %}
-                <div class="flash">{{ message }}</div>
-            {% endfor %}
-            
             <div class="well well-lg">
                 <label for="name"><strong> Name <span class="req" >{Required}</span> </strong> </label>
                 <div>
                     <small class="text-muted">Please enter your full name</small>
                 </div>
-                {{ form.name(class = "textfield",placeholder='John Brown') }}
+                {{ form.Name(class = "textfield",placeholder='Joe Grind') }}
+                {% for message in form.Name.errors %}
+                    <div class="error">{{ message }}</div>
+                {% endfor %}
                 <br> </br>
+                
                 <label for="email"><strong> Email <span class="req" >{Required}</span> </strong></label>
                 <div>
                     <small class="text-muted">Please enter your e-mail address</small>
                 </div>
                 {{ form.Email(class = "textfield", placeholder='yourname@email.com') }}
+                {% for message in form.Email.errors %}
+                     <div class="error">{{ message }}</div>
+                {% endfor %}
                 <br> </br>
                 
                 <label for="subject"><strong> Subject <span class="req" >{Required}</span> </strong></label>
@@ -44,6 +35,9 @@
                     <small class="text-muted">Please enter your subject area </small>
                 </div>
                 {{ form.Subject(class = "textfield", placeholder='Your subject goes here') }}
+                {% for message in form.Subject.errors %}
+                    <div class="error">{{ message }}</div>
+                {% endfor %}
                 <br> </br>
                 
                 <label for="message"><strong> Message <span class="req" >{Required}</span></label>
@@ -51,6 +45,9 @@
                     <small class="text-muted">Please enter the message you want to send</small>
                 </div>
                 {{ form.Message(class = "textfield", id = 'textbox',placeholder='Your message goes here') }}
+                {% for message in form.Message.errors %}
+                    <div class="error">{{ message }}</div>
+                {% endfor %}
                 <br> </br>
                  {{ form.Submit(class = "button") }}
             </div>

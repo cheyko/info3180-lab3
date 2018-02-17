@@ -36,7 +36,7 @@ def contact():
             return render_template('contact.html',form=DeForm)
 
          else:
-            formname = DeForm.name.data
+            formname = DeForm.Name.data
             formaddr = DeForm.Email.data
             formsubject = DeForm.Subject.data
             formmsg = DeForm.Message.data

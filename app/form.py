@@ -5,8 +5,8 @@ from flask_wtf import FlaskForm
 
 
 class ContactForm(FlaskForm):
-    name = TextField("Name", validators=[Required("Please enter your name.")])
-    Email= TextField("E-Mail", validators=[Required("Please enter your Email."),Email("Please enter your Email.")])
-    Subject= TextField("Subject", validators=[Required("Please enter a Subject.")])
+    Name = TextField("Name", validators=[Required("Please enter your name properly.")])
+    Email= TextField("E-Mail", validators=[Required("Please enter a Email address."),Email("Please enter a valid Email.")])
+    Subject= TextField("Subject", validators=[Required("Please enter a Subject matter.")])
     Message= TextAreaField("Message", validators=[Required("Please enter a Message.")])
     Submit = SubmitField("Send")
